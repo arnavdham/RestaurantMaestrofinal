@@ -36,6 +36,8 @@ Develop a comprehensive restaurant management system (RMS) to streamline operati
 
 - Customer Relationship Management (CRM): Capture customer data, preferences, and purchase history to personalize marketing campaigns and loyalty programs.
 
+- Delivery Management System: Manage drivers and order deliveries.
+
 # Stock Market System
 
 Develop a user-friendly and comprehensive stock market platform that empowers investors with intuitive tools, insightful data, and seamless trading experiences.
