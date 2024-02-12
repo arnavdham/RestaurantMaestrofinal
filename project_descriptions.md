@@ -4,7 +4,9 @@ Develop a comprehensive restaurant management system (RMS) to streamline operati
 
 ## Key Features:
 
-- Point-of-Sale (POS) System: Process orders, accept payments, and manage transactions with a user-friendly and intuitive interface.
+- Ordering System: Allows waiters to write order tickets digitally, which will be directly sent to the kitchen interface. Also will automatically generate bills for each table at the end of the meal
+
+- Kitchen Interace: Allows the cooks to track orders and update which items of specific orders have been completed.
 
 - Menu Management: Easily create, edit, and update menus with descriptions, prices, modifiers, and images.
 
@@ -14,6 +16,6 @@ Develop a comprehensive restaurant management system (RMS) to streamline operati
 
 - Employee Management: Schedule shifts, manage payroll, track employee performance, and facilitate communication.
 
-- Customer Relationship Management (CRM): Capture customer data, preferences, and purchase history to personalize marketing campaigns and loyalty programs.
+- Customer Relationship Management (CRM): Recieve and view customer reviews.
 
 - Delivery Management System: Manage drivers and order deliveries.
