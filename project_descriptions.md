@@ -10,8 +10,6 @@ Develop a comprehensive restaurant management system (RMS) to streamline operati
 
 - Menu Management: Easily create, edit, and update menus with descriptions, prices, modifiers, and images.
 
-- Inventory Control: Track ingredients, manage stock levels, receive deliveries, and generate reports to optimize purchasing and prevent waste.
-
 - Table Management: Create floor plans, assign reservations, track table status, and optimize seating arrangements.
 
 - Employee Management: Schedule shifts, manage payroll, track employee performance, and facilitate communication.
