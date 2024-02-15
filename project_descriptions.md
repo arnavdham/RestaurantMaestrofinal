@@ -1,4 +1,4 @@
-# Restuarant Management System
+# TableMaestro : A Restuarant Management System
 
 Develop a comprehensive restaurant management system (RMS) to streamline operations, boost efficiency, and improve customer service in your restaurant.
 
