@@ -1,4 +1,4 @@
-# Restuarant Management System
+# TableMaestro : A Restuarant Management System
 
 Develop a comprehensive restaurant management system (RMS) to streamline operations, boost efficiency, and improve customer service in your restaurant.
 
@@ -9,8 +9,6 @@ Develop a comprehensive restaurant management system (RMS) to streamline operati
 - Kitchen Interace: Allows the cooks to track orders and update which items of specific orders have been completed.
 
 - Menu Management: Easily create, edit, and update menus with descriptions, prices, modifiers, and images.
-
-- Inventory Control: Track ingredients, manage stock levels, receive deliveries, and generate reports to optimize purchasing and prevent waste.
 
 - Table Management: Create floor plans, assign reservations, track table status, and optimize seating arrangements.
 
