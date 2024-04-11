@@ -60,11 +60,12 @@ public class TableInfoPage extends JFrame {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     try {
-                        Statement stmt = sql_con.createStatement();
+                        Statement stmt = sql_con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
+                                ResultSet.CONCUR_UPDATABLE);
                         ResultSet rs = stmt.executeQuery(
-                                "SELECT DISTINCT waiter_id FROM assign_to WHERE table_number=" + table_number + ";");
+                                "SELECT DISTINCT employee_id FROM assign_to WHERE table_number=" + table_number + ";");
                         rs.first();
-                        int waiter_id = rs.getInt("waiter_id");
+                        int waiter_id = rs.getInt("employee_id");
                         dispose();
                         new TableListPage(waiter_id, sql_con);
                     } catch (SQLException err) {
