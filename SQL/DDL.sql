@@ -1,8 +1,11 @@
+DROP DATABASE restaurant_maestro;
+CREATE DATABASE restaurant_maestro;
+USE restaurant_maestro;
 CREATE TABLE employee (
-    employee_id INT PRIMARY KEY,
+    employee_id int auto_increment PRIMARY KEY,
     first_name VARCHAR(50),
     last_name VARCHAR(50),
-    username VARCHAR(50),
+    username VARCHAR(50) ,
     password_hash VARCHAR(256),
     salary INT,
     gender ENUM('male','female','other')
@@ -30,7 +33,7 @@ CREATE TABLE delivery_boy (
 
 CREATE TABLE menu_item (
     item_name VARCHAR(50),
-    item_id int PRIMARY KEY,
+    item_id int PRIMARY KEY auto_increment,
     price int,
     item_availability ENUM('no','yes'),
     item_description VARCHAR(200),
@@ -39,9 +42,9 @@ CREATE TABLE menu_item (
 
 -- item type lite
 
-CREATE TABLE order (
-    order_id int PRIMARY KEY,
-    bill_amount int,
+CREATE TABLE restaurant_order (
+    order_id int PRIMARY KEY auto_increment,
+    bill_amount DECIMAL(8,2),
     order_time DATETIME,
     completion_time DATETIME,
     order_status ENUM('active', 'completed'),
@@ -50,9 +53,9 @@ CREATE TABLE order (
 );
 
 CREATE TABLE invoice (
-    invoice_id int PRIMARY KEY,
-    waiter_rating int,
-    invoice_time DATETIME,
+    invoice_id int PRIMARY KEY auto_increment,
+    waiter_rating int not null,
+    invoice_time DATETIME not null,
     mode_of_payment ENUM('cash','card','UPI')
 );
 
@@ -64,12 +67,12 @@ CREATE TABLE customer_information (
     FOREIGN KEY (invoice_id) REFERENCES invoice(invoice_id)
 );
 
-CREATE TABLE resturant_table (
-    table_number int PRIMARY KEY,
+CREATE TABLE restaurant_table (
+    table_number int PRIMARY KEY auto_increment,
     res_first_name VARCHAR(50),
     res_last_name VARCHAR(50),
-    res_phone_number int, -- CHECK (Value >999999999 AND Value < 10000000000)
-    reservation_status ENUM('reserved', 'available')
+    res_phone_number CHAR(10),
+    table_status ENUM('reserved', 'available', 'occupied')
 );
 
 CREATE TABLE cusine_cook (
@@ -82,31 +85,31 @@ CREATE TABLE cusine_cook (
 
 CREATE TABLE ordered_item (
     order_id int,
-    FOREIGN KEY (order_id) REFERENCES order(order_id),
+    FOREIGN KEY (order_id) REFERENCES restaurant_order(order_id),
     item_id int,
     FOREIGN KEY (item_id) REFERENCES menu_item(item_id),
     comment VARCHAR(500),
     quantity_ordered int,
-    item_status ENUM('preparing', 'prepared', 'delivered')
+    item_status ENUM('preparing', 'served', 'delivered')
 );
 
 CREATE TABLE order_invoice (
     order_id int,
-    FOREIGN KEY (order_id) REFERENCES order(order_id),
+    FOREIGN KEY (order_id) REFERENCES restaurant_order(order_id),
     invoice_id int,
     FOREIGN KEY (invoice_id) REFERENCES invoice(invoice_id)
 );
 
 CREATE TABLE seated_at (
     order_id int,
-    FOREIGN KEY (order_id) REFERENCES order(order_id),
+    FOREIGN KEY (order_id) REFERENCES restaurant_order(order_id),
     table_number int,
-    FOREIGN KEY (table_number) REFERENCES resturant_table(table_number)
+    FOREIGN KEY (table_number) REFERENCES restaurant_table(table_number)
 );
 
 CREATE TABLE assign_to (
     table_number int,
-    FOREIGN KEY (table_number) REFERENCES resturant_table(table_number),
+    FOREIGN KEY (table_number) REFERENCES restaurant_table(table_number),
     employee_id int,
     FOREIGN KEY (employee_id) REFERENCES employee(employee_id)
 );
