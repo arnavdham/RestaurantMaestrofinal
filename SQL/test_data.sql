@@ -28,10 +28,10 @@ VALUES
 ('Item 4', 18, 'yes', 'Description 4', 'non-veg');
 
 -- Test data for restaurant_order table
-INSERT INTO restaurant_order (order_id, bill_amount, order_time, completion_time, order_status, discount, order_type)
+INSERT INTO restaurant_order (bill_amount, order_time, completion_time, order_status, discount, order_type)
 VALUES
-(1, 50.00, '2024-04-10 12:00:00', '2024-04-10 13:00:00', 'completed', 0, 'dine in'),
-(2, 40.00, '2024-04-10 13:30:00', NULL, 'active', 5, 'delivery');
+(50.00, '2024-04-10 12:00:00', '2024-04-10 13:00:00', 'completed', 0, 'dine in'),
+(40.00, '2024-04-10 13:30:00', NULL, 'active', 5, 'delivery');
 
 -- Test data for invoice table
 INSERT INTO invoice (waiter_rating, invoice_time, mode_of_payment)
@@ -56,7 +56,7 @@ VALUES
 INSERT INTO cusine_cook (cusine_name, item_id, employee_id)
 VALUES
 ('Cuisine 1', 1, 3),
-('Cuisine 2', 2, 4);
+('Cuisine 2', 2, 3);
 
 -- Test data for ordered_item table
 INSERT INTO ordered_item (order_id, item_id, comment, quantity_ordered, item_status)
@@ -74,12 +74,11 @@ VALUES
 -- Test data for seated_at table
 INSERT INTO seated_at (order_id, table_number)
 VALUES
-(1, 1),
-(2, 2);
+(1, 1);
 
 -- Test data for assign_to table
 INSERT INTO assign_to (table_number, employee_id)
 VALUES
 (1, 1),
 (2, 1),
-(3, 1);
+(3,1);

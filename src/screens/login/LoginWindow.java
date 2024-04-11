@@ -2,7 +2,7 @@ package screens.login;
 
 import javax.swing.*;
 
-import screens.waiter.WaiterTableListView;
+import screens.waiter.TableListPage;
 import utils.ErrorScreen;
 import utils.PasswordHash;
 
@@ -85,7 +85,7 @@ public class LoginWindow extends JFrame {
                     switch (role) {
                         case "Waiter":
                             dispose();
-                            new WaiterTableListView(employee_id, sql_con).setVisible(true);
+                            new TableListPage(employee_id, sql_con).setVisible(true);
 
                         default:
                             break;

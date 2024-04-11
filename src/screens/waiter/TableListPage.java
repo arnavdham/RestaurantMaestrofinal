@@ -5,10 +5,10 @@ import java.awt.*;
 import java.awt.event.*;
 import java.sql.*;
 
-public class WaiterTableListView extends JFrame {
+public class TableListPage extends JFrame {
     // Simulating table occupancy status
 
-    public WaiterTableListView(int waiter_id, Connection sql_con) {
+    public TableListPage(int waiter_id, Connection sql_con) {
         super("Table Interface");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);// Center the window
@@ -36,7 +36,8 @@ public class WaiterTableListView extends JFrame {
                     tableButton.addActionListener(new ActionListener() {
                         @Override
                         public void actionPerformed(ActionEvent e) {
-                            System.out.println(tableNumber);
+                            dispose();
+                            new TableInfoPage(tableNumber, sql_con).setVisible(true);
                         }
                     });
                 } else if (tableStatus.equals("available")) {
@@ -53,7 +54,8 @@ public class WaiterTableListView extends JFrame {
                     tableButton.addActionListener(new ActionListener() {
                         @Override
                         public void actionPerformed(ActionEvent e) {
-                            System.out.println(tableNumber);
+                            dispose();
+                            new TableInfoPage(tableNumber, sql_con).setVisible(true);
                         }
                     });
                 }

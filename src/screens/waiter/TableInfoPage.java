@@ -12,16 +12,23 @@ public class TableInfoPage extends JFrame {
         super("Table Info");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(400, 300);
+        setLocationRelativeTo(null);
+        setResizable(false);
         try {
 
             Statement stmt = sql_con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
-            // select mi.item_id, mi.item_name, oi.comment, oi.quantity_ordered,
-            // oi.item_status from menu_item mi join ordered_item oi using (item_id) where
-            // order_id in (select order_id from restaurant_order where order_id in (select
-            // order_id from seated_at where table_number=3) and order_status='active');
             ResultSet rs = stmt.executeQuery(
-                    "SELECT mi.item_id, mi.item_name, oi.comment, oi.quantity_ordered, oi.item_status FROM menu_item mi JOIN ordered_item oi USING (item_ID) WHERE order_id in (SELECT order_id FROM restaurant_order WHERE order_id IN (SELECT order_id FROM seated_at WHERE table_number="
-                            + table_number + " AND order_status='active'))");
+                    "SELECT order_id FROM restaurant_order WHERE order_id IN (SELECT order_id FROM seated_at WHERE table_number="
+                            + table_number + " AND order_status='active')");
+            int order_id = -1;
+            if (rs.isBeforeFirst()) {
+                rs.first();
+                order_id = rs.getInt("order_id");
+            }
+            final int fin_order_id = order_id;
+            rs = stmt.executeQuery(
+                    "SELECT mi.item_id, mi.item_name, oi.comment, oi.quantity_ordered, oi.item_status, oi.order_id FROM menu_item mi JOIN ordered_item oi USING (item_ID) WHERE order_id="
+                            + order_id + ";");
             // Panel for current order section
             JPanel currentOrderPanel = new JPanel(new BorderLayout());
             JTextArea orderTextArea = new JTextArea(10, 20);
@@ -40,17 +47,38 @@ public class TableInfoPage extends JFrame {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     dispose();
+                    new PlaceOrderPage(table_number, fin_order_id, sql_con).setVisible(true);
+
                 }
             });
             JButton generateInvoiceButton = new JButton("Generate Invoice");
             actionsPanel.add(placeOrderButton);
             actionsPanel.add(generateInvoiceButton);
 
+            JButton backButton = new JButton("Back");
+            backButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    try {
+                        Statement stmt = sql_con.createStatement();
+                        ResultSet rs = stmt.executeQuery(
+                                "SELECT DISTINCT waiter_id FROM assign_to WHERE table_number=" + table_number + ";");
+                        rs.first();
+                        int waiter_id = rs.getInt("waiter_id");
+                        dispose();
+                        new TableListPage(waiter_id, sql_con);
+                    } catch (SQLException err) {
+                        err.printStackTrace();
+                    }
+
+                }
+            });
+
             // Add panels to the frame
             add(currentOrderPanel, BorderLayout.CENTER);
             add(actionsPanel, BorderLayout.SOUTH);
+            add(backButton, BorderLayout.NORTH);
 
-            setVisible(true);
         } catch (SQLException e) {
             e.printStackTrace();
         }
