@@ -5,9 +5,11 @@ import java.awt.event.*;
 import java.sql.*;
 import java.util.List;
 import java.util.Map;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.HashMap;
+import models.OrderItem;
 
 import javax.swing.*;
 
@@ -160,7 +162,10 @@ public class PlaceOrderPage extends JFrame {
     }
 
     private void sendOrderToKitchen(int table_number, int order_id, Connection sql_con) throws Exception {
-        List<OrderItem> orderItems = orderList.getSelectedValuesList();
+        List<OrderItem> orderItems = new ArrayList<OrderItem>(orderList.getModel().getSize());
+        for (int i = 0; i < orderList.getModel().getSize(); i++) {
+            orderItems.add(orderList.getModel().getElementAt(i));
+        }
         if (order_id == -1) {
             Calendar calendar = Calendar.getInstance();
             PreparedStatement table_stmt = sql_con.prepareStatement(
@@ -196,41 +201,11 @@ public class PlaceOrderPage extends JFrame {
             stmt.setInt(2, item.getId());
             stmt.setString(3, item.getComment());
             stmt.setInt(4, item.getQuantity());
-            stmt.setString(5, "preparing");
+            stmt.setString(5, "sent");
             stmt.execute();
         }
         dispose();
         new TableInfoPage(table_number, sql_con).setVisible(true);
     }
 
-    private class OrderItem {
-        private int id;
-        private String name;
-        private int quantity;
-        private String comment;
-
-        public OrderItem(int id, String name, int quantity, String comment) {
-            this.id = id;
-            this.name = name;
-            this.quantity = quantity;
-            this.comment = comment;
-        }
-
-        public int getId() {
-            return id;
-        }
-
-        public int getQuantity() {
-            return quantity;
-        }
-
-        public String getComment() {
-            return comment;
-        }
-
-        @Override
-        public String toString() {
-            return name + " (Quantity: " + quantity + ") - Comment: " + comment;
-        }
-    }
 }

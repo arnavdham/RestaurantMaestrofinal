@@ -76,11 +76,12 @@ CREATE TABLE restaurant_table (
 );
 
 CREATE TABLE cusine_cook (
-    cusine_name VARCHAR(50) PRIMARY KEY,
+    cusine_name VARCHAR(50),
     item_id int,
     employee_id int,
     FOREIGN KEY (employee_id) REFERENCES employee(employee_id),
-    FOREIGN KEY (item_id) REFERENCES menu_item(item_id)
+    FOREIGN KEY (item_id) REFERENCES menu_item(item_id),
+    PRIMARY KEY (cusine_name, item_id)
 );
 
 CREATE TABLE ordered_item (
@@ -90,7 +91,8 @@ CREATE TABLE ordered_item (
     FOREIGN KEY (item_id) REFERENCES menu_item(item_id),
     comment VARCHAR(500),
     quantity_ordered int,
-    item_status ENUM('preparing', 'served', 'delivered')
+    item_status ENUM('sent','preparing', 'served', 'delivered'),
+    PRIMARY KEY (order_id, item_id)
 );
 
 CREATE TABLE order_invoice (

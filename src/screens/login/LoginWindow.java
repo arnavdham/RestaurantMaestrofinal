@@ -2,6 +2,7 @@ package screens.login;
 
 import javax.swing.*;
 
+import screens.cook.KitchenInterface;
 import screens.waiter.TableListPage;
 import utils.ErrorScreen;
 import utils.PasswordHash;
@@ -86,7 +87,10 @@ public class LoginWindow extends JFrame {
                         case "Waiter":
                             dispose();
                             new TableListPage(employee_id, sql_con).setVisible(true);
-
+                            break;
+                        case "Cook":
+                            dispose();
+                            new KitchenInterface(employee_id, sql_con).setVisible(true);
                         default:
                             break;
                     }
