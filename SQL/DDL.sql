@@ -72,7 +72,7 @@ CREATE TABLE restaurant_table (
     res_first_name VARCHAR(50),
     res_last_name VARCHAR(50),
     res_phone_number CHAR(10),
-    table_status ENUM('reserved', 'available', 'occupied')
+    table_status ENUM('Reserved', 'Available', 'Occupied')
 );
 
 CREATE TABLE cusine_cook (

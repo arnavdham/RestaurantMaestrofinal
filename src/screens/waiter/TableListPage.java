@@ -31,7 +31,7 @@ public class TableListPage extends JFrame {
                 JButton tableButton = new JButton("Table " + tableNumber);
                 tableButton.setPreferredSize(new Dimension(150, 40)); // Fixed button size
                 tableButton.setOpaque(true);
-                if (tableStatus.equals("occupied")) {
+                if (tableStatus.equalsIgnoreCase("occupied")) {
                     tableButton.setBackground(Color.RED); // Occupied
                     tableButton.addActionListener(new ActionListener() {
                         @Override
@@ -40,7 +40,7 @@ public class TableListPage extends JFrame {
                             new TableInfoPage(tableNumber, sql_con).setVisible(true);
                         }
                     });
-                } else if (tableStatus.equals("available")) {
+                } else if (tableStatus.equalsIgnoreCase("available")) {
                     tableButton.setBackground(Color.GREEN); // Not occupied
                     tableButton.addActionListener(new ActionListener() {
                         @Override
@@ -49,7 +49,7 @@ public class TableListPage extends JFrame {
                             new TableInfoPage(tableNumber, sql_con).setVisible(true);
                         }
                     });
-                } else if (tableStatus.equals("reserved")) {
+                } else if (tableStatus.equalsIgnoreCase("reserved")) {
                     tableButton.setBackground(Color.BLUE);
                     tableButton.addActionListener(new ActionListener() {
                         @Override

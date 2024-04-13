@@ -31,26 +31,26 @@ INSERT INTO delivery_boy (employee_id) VALUES (9); -- Sophia
 
 -- Insert data for restaurant tables
 INSERT INTO restaurant_table (res_first_name, res_last_name, res_phone_number, table_status) VALUES
-(NULL, NULL, NULL, 'available'),
-(NULL, NULL, NULL, 'available'),
-(NULL, NULL, NULL, 'available'),
-(NULL, NULL, NULL, 'available'),
-(NULL, NULL, NULL, 'available'),
-(NULL, NULL, NULL, 'available'),
-(NULL, NULL, NULL, 'available'),
-(NULL, NULL, NULL, 'available'),
-(NULL, NULL, NULL, 'available'),
-(NULL, NULL, NULL, 'available'),
-(NULL, NULL, NULL, 'available'),
-(NULL, NULL, NULL, 'available'),
-(NULL, NULL, NULL, 'available'),
-(NULL, NULL, NULL, 'available'),
-(NULL, NULL, NULL, 'available'),
-(NULL, NULL, NULL, 'available'),
-(NULL, NULL, NULL, 'available'),
-(NULL, NULL, NULL, 'available'),
-(NULL, NULL, NULL, 'available'),
-(NULL, NULL, NULL, 'available');
+(NULL, NULL, NULL, 'Available'),
+(NULL, NULL, NULL, 'Available'),
+(NULL, NULL, NULL, 'Available'),
+(NULL, NULL, NULL, 'Available'),
+(NULL, NULL, NULL, 'Available'),
+(NULL, NULL, NULL, 'Available'),
+(NULL, NULL, NULL, 'Available'),
+(NULL, NULL, NULL, 'Available'),
+(NULL, NULL, NULL, 'Available'),
+(NULL, NULL, NULL, 'Available'),
+(NULL, NULL, NULL, 'Available'),
+(NULL, NULL, NULL, 'Available'),
+(NULL, NULL, NULL, 'Available'),
+(NULL, NULL, NULL, 'Available'),
+(NULL, NULL, NULL, 'Available'),
+(NULL, NULL, NULL, 'Available'),
+(NULL, NULL, NULL, 'Available'),
+(NULL, NULL, NULL, 'Available'),
+(NULL, NULL, NULL, 'Available'),
+(NULL, NULL, NULL, 'Available');
 
 -- Insert data for cuisines and corresponding menu items
 

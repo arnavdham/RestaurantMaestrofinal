@@ -39,6 +39,15 @@ public class ManagerInterface extends JFrame {
             }
         });
 
+        tablesButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+                new TableInfoScreen(sql_con).setVisible(true);
+
+            }
+        });
+
         selectionPanel.add(menuButton);
         selectionPanel.add(tablesButton);
         selectionPanel.add(employeeButton);

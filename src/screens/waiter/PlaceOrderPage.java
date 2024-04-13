@@ -169,7 +169,7 @@ public class PlaceOrderPage extends JFrame {
         if (order_id == -1) {
             Calendar calendar = Calendar.getInstance();
             PreparedStatement table_stmt = sql_con.prepareStatement(
-                    "UPDATE restaurant_table SET table_status='occupied' WHERE table_number=" + table_number + ";");
+                    "UPDATE restaurant_table SET table_status='Occupied' WHERE table_number=" + table_number + ";");
             table_stmt.executeUpdate();
             PreparedStatement order_stmt = sql_con.prepareStatement(
                     "INSERT INTO restaurant_order ( order_time,  order_status, discount, order_type)"
