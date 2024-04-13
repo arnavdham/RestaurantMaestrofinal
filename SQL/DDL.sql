@@ -8,6 +8,7 @@ CREATE TABLE employee (
     username VARCHAR(50) ,
     password_hash VARCHAR(256),
     salary INT,
+    shift ENUM('Lunch', 'Dinner', 'Both'),
     gender ENUM('male','female','other')
 );
 
@@ -36,7 +37,6 @@ CREATE TABLE menu_item (
     item_id int PRIMARY KEY auto_increment,
     price int,
     item_availability ENUM('no','yes'),
-    item_description VARCHAR(200),
     item_type ENUM('veg','non-veg')
 );
 
@@ -102,6 +102,14 @@ CREATE TABLE order_invoice (
     FOREIGN KEY (invoice_id) REFERENCES invoice(invoice_id)
 );
 
+CREATE TABLE delivered_by (
+	employee_id int,
+    FOREIGN KEY (employee_id) REFERENCES delivery_boy(employee_id),
+    order_id int,
+    FOREIGN KEY (order_id) REFERENCES restaurant_order(order_id),
+    address VARCHAR(50)
+);
+
 CREATE TABLE seated_at (
     order_id int,
     FOREIGN KEY (order_id) REFERENCES restaurant_order(order_id),
@@ -113,5 +121,6 @@ CREATE TABLE assign_to (
     table_number int,
     FOREIGN KEY (table_number) REFERENCES restaurant_table(table_number),
     employee_id int,
-    FOREIGN KEY (employee_id) REFERENCES employee(employee_id)
+    FOREIGN KEY (employee_id) REFERENCES employee(employee_id),
+    PRIMARY KEY (table_number, employee_id)
 );

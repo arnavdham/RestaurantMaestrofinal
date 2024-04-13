@@ -9,7 +9,6 @@ public class ErrorScreen extends JFrame {
     public ErrorScreen(String errorMessage) {
         setTitle("Error");
         setSize(300, 150);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 
         // Create error message label

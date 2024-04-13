@@ -4,6 +4,7 @@ import javax.swing.*;
 
 import screens.cook.KitchenInterface;
 import screens.waiter.TableListPage;
+import screens.manager.ManagerInterface;
 import utils.ErrorScreen;
 import utils.PasswordHash;
 
@@ -91,6 +92,9 @@ public class LoginWindow extends JFrame {
                         case "Cook":
                             dispose();
                             new KitchenInterface(employee_id, sql_con).setVisible(true);
+                        case "Manager":
+                            dispose();
+                            new ManagerInterface(sql_con).setVisible(true);
                         default:
                             break;
                     }
