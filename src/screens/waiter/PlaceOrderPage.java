@@ -17,7 +17,7 @@ public class PlaceOrderPage extends JFrame {
     private DefaultListModel<OrderItem> orderListModel;
     private JList<OrderItem> orderList;
 
-    public PlaceOrderPage(int table_number, int order_id, Connection sql_con) {
+    public PlaceOrderPage(int table_number, int order_id, int waiter_id, Connection sql_con) {
         setTitle("Restaurant Management System");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(800, 600);
@@ -128,7 +128,7 @@ public class PlaceOrderPage extends JFrame {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     try {
-                        sendOrderToKitchen(table_number, order_id, sql_con);
+                        sendOrderToKitchen(table_number, order_id, waiter_id, sql_con);
                     } catch (Exception err) {
                         err.printStackTrace();
                     }
@@ -140,7 +140,7 @@ public class PlaceOrderPage extends JFrame {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     dispose();
-                    new TableInfoPage(table_number, sql_con).setVisible(true);
+                    new TableInfoPage(table_number, sql_con, waiter_id).setVisible(true);
                 }
             });
 
@@ -161,7 +161,8 @@ public class PlaceOrderPage extends JFrame {
         }
     }
 
-    private void sendOrderToKitchen(int table_number, int order_id, Connection sql_con) throws Exception {
+    private void sendOrderToKitchen(int table_number, int order_id, int waiter_id, Connection sql_con)
+            throws Exception {
         List<OrderItem> orderItems = new ArrayList<OrderItem>(orderList.getModel().getSize());
         for (int i = 0; i < orderList.getModel().getSize(); i++) {
             orderItems.add(orderList.getModel().getElementAt(i));
@@ -205,7 +206,7 @@ public class PlaceOrderPage extends JFrame {
             stmt.execute();
         }
         dispose();
-        new TableInfoPage(table_number, sql_con).setVisible(true);
+        new TableInfoPage(table_number, sql_con, waiter_id).setVisible(true);
     }
 
 }

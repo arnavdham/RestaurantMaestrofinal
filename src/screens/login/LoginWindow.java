@@ -3,6 +3,7 @@ package screens.login;
 import javax.swing.*;
 
 import screens.cook.KitchenInterface;
+import screens.delivery.DeliveryManagementSystem;
 import screens.waiter.TableListPage;
 import screens.manager.ManagerInterface;
 import utils.ErrorScreen;
@@ -74,11 +75,16 @@ public class LoginWindow extends JFrame {
                     if (!employee.first()) {
                         dispose();
                         new ErrorScreen("Invalid username or password").setVisible(true);
-                        new LoginWindow(role, sql_con).setVisible(true);
                     }
                     int employee_id = employee.getInt("employee_id");
+                    final String role_string;
+                    if (role == "Delivery") {
+                        role_string = "delivery_boy";
+                    } else {
+                        role_string = role.toLowerCase();
+                    }
                     ResultSet role_emp = stmt
-                            .executeQuery("SELECT employee_id FROM " + role.toLowerCase() + " WHERE employee_id="
+                            .executeQuery("SELECT employee_id FROM " + role_string + " WHERE employee_id="
                                     + employee_id + ";");
                     if (!role_emp.first()) {
                         dispose();
@@ -97,6 +103,10 @@ public class LoginWindow extends JFrame {
                         case "Manager":
                             dispose();
                             new ManagerInterface(sql_con).setVisible(true);
+                            break;
+                        case "Delivery":
+                            dispose();
+                            new DeliveryManagementSystem(employee_id, sql_con).setVisible(true);
                             break;
                         default:
                             break;

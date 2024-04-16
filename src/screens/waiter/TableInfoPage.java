@@ -8,7 +8,7 @@ import java.sql.*;
 
 public class TableInfoPage extends JFrame {
 
-    public TableInfoPage(int table_number, Connection sql_con) {
+    public TableInfoPage(int table_number, Connection sql_con, int waiter_id) {
         super("Table Info");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(400, 300);
@@ -47,13 +47,21 @@ public class TableInfoPage extends JFrame {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     dispose();
-                    new PlaceOrderPage(table_number, fin_order_id, sql_con).setVisible(true);
+                    new PlaceOrderPage(table_number, fin_order_id, waiter_id, sql_con).setVisible(true);
 
                 }
             });
             JButton generateInvoiceButton = new JButton("Generate Invoice");
             actionsPanel.add(placeOrderButton);
             actionsPanel.add(generateInvoiceButton);
+
+            generateInvoiceButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    dispose();
+                    new GenerateInvoicePage(sql_con, fin_order_id, waiter_id).setVisible(true);
+                }
+            });
 
             JButton backButton = new JButton("Back");
             backButton.addActionListener(new ActionListener() {
