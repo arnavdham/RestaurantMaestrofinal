@@ -74,6 +74,7 @@ public class LoginWindow extends JFrame {
                     if (!employee.first()) {
                         dispose();
                         new ErrorScreen("Invalid username or password").setVisible(true);
+                        new LoginWindow(role, sql_con).setVisible(true);
                     }
                     int employee_id = employee.getInt("employee_id");
                     ResultSet role_emp = stmt
@@ -92,9 +93,11 @@ public class LoginWindow extends JFrame {
                         case "Cook":
                             dispose();
                             new KitchenInterface(employee_id, sql_con).setVisible(true);
+                            break;
                         case "Manager":
                             dispose();
                             new ManagerInterface(sql_con).setVisible(true);
+                            break;
                         default:
                             break;
                     }

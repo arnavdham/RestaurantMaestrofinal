@@ -13,7 +13,6 @@ public class AddItemScreen extends JFrame {
     public AddItemScreen(Connection sql_con) {
         this.sql_con = sql_con;
         setTitle("Add New Item");
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setSize(400, 200);
         setLocationRelativeTo(null);
 
@@ -91,6 +90,7 @@ public class AddItemScreen extends JFrame {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     dispose(); // Close the window without adding the item
+                    new UpdateItemScreen(sql_con).setVisible(true);
                 }
             });
             panel.add(cancelButton);

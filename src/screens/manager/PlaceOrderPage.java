@@ -1,14 +1,11 @@
-package screens.waiter;
+package screens.manager;
 
 import java.awt.*;
 import java.awt.event.*;
 import java.sql.*;
 import java.util.List;
-import java.util.Map;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
-import java.util.HashMap;
 import models.OrderItem;
 
 import javax.swing.*;
@@ -17,25 +14,13 @@ public class PlaceOrderPage extends JFrame {
     private DefaultListModel<OrderItem> orderListModel;
     private JList<OrderItem> orderList;
 
-    public PlaceOrderPage(int table_number, int order_id, Connection sql_con) {
+    public PlaceOrderPage(Connection sql_con) {
         setTitle("Restaurant Management System");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(800, 600);
         setLocationRelativeTo(null); // Center the window
         setResizable(false);
 
-        // Sample data with cuisines and items
-        Map<String, List<String>> cuisineItems = new HashMap<>();
-        cuisineItems.put("Italian", Arrays.asList("Pizza", "Pasta", "Lasagna"));
-        cuisineItems.put("Mexican", Arrays.asList("Taco", "Burrito", "Enchiladas"));
-        cuisineItems.put("Chinese", Arrays.asList("Dim Sum", "Kung Pao Chicken", "Mapo Tofu"));
-        cuisineItems.put("Indian", Arrays.asList("Curry", "Biryani", "Samosa"));
-        cuisineItems.put("Thai", Arrays.asList("Pad Thai", "Tom Yum Soup", "Green Curry"));
-        cuisineItems.put("Japanese", Arrays.asList("Sushi", "Ramen", "Tempura"));
-        cuisineItems.put("American", Arrays.asList("Hamburger", "Hot Dog", "BBQ Ribs"));
-        cuisineItems.put("Mediterranean", Arrays.asList("Falafel", "Hummus", "Tabbouleh"));
-        cuisineItems.put("Greek", Arrays.asList("Gyro", "Moussaka", "Greek Salad"));
-        cuisineItems.put("French", Arrays.asList("Croissant", "Quiche", "Coq au Vin"));
         try {
 
             Statement stmt = sql_con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
@@ -128,7 +113,7 @@ public class PlaceOrderPage extends JFrame {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     try {
-                        sendOrderToKitchen(table_number, order_id, sql_con);
+                        sendOrderToKitchen(sql_con);
                     } catch (Exception err) {
                         err.printStackTrace();
                     }
@@ -140,7 +125,6 @@ public class PlaceOrderPage extends JFrame {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     dispose();
-                    new TableInfoPage(table_number, sql_con).setVisible(true);
                 }
             });
 
@@ -161,37 +145,28 @@ public class PlaceOrderPage extends JFrame {
         }
     }
 
-    private void sendOrderToKitchen(int table_number, int order_id, Connection sql_con) throws Exception {
+    private void sendOrderToKitchen(Connection sql_con) throws Exception {
         List<OrderItem> orderItems = new ArrayList<OrderItem>(orderList.getModel().getSize());
         for (int i = 0; i < orderList.getModel().getSize(); i++) {
             orderItems.add(orderList.getModel().getElementAt(i));
         }
+        Calendar calendar = Calendar.getInstance();
+        PreparedStatement order_stmt = sql_con.prepareStatement(
+                "INSERT INTO restaurant_order ( order_time,  order_status, discount, order_type)"
+                        + " VALUES (?,?,?,?);",
+                Statement.RETURN_GENERATED_KEYS);
+        order_stmt.setTimestamp(1, new Timestamp(calendar.getTimeInMillis()));
+        order_stmt.setString(2, "active");
+        order_stmt.setInt(3, 0);
+        order_stmt.setString(4, "delivery");
+        order_stmt.executeUpdate();
+        ResultSet rs = order_stmt.getGeneratedKeys();
+        int order_id = -1;
+        if (rs.next()) {
+            order_id = rs.getInt(1);
+        }
         if (order_id == -1) {
-            Calendar calendar = Calendar.getInstance();
-            PreparedStatement table_stmt = sql_con.prepareStatement(
-                    "UPDATE restaurant_table SET table_status='Occupied' WHERE table_number=" + table_number + ";");
-            table_stmt.executeUpdate();
-            PreparedStatement order_stmt = sql_con.prepareStatement(
-                    "INSERT INTO restaurant_order ( order_time,  order_status, discount, order_type)"
-                            + " VALUES (?,?,?,?);",
-                    Statement.RETURN_GENERATED_KEYS);
-            order_stmt.setTimestamp(1, new Timestamp(calendar.getTimeInMillis()));
-            order_stmt.setString(2, "active");
-            order_stmt.setInt(3, 0);
-            order_stmt.setString(4, "dine in");
-            order_stmt.executeUpdate();
-            ResultSet rs = order_stmt.getGeneratedKeys();
-            if (rs.next()) {
-                order_id = rs.getInt(1);
-            }
-            PreparedStatement seated_stmt = sql_con.prepareStatement(
-                    "INSERT INTO seated_at (table_number, order_id)"
-                            + " VALUES (?,?);");
-
-            seated_stmt.setInt(1, table_number);
-            seated_stmt.setInt(2, order_id);
-            seated_stmt.executeUpdate();
-
+            return;
         }
         for (OrderItem item : orderItems) {
             PreparedStatement stmt = sql_con.prepareStatement(
@@ -203,9 +178,10 @@ public class PlaceOrderPage extends JFrame {
             stmt.setInt(4, item.getQuantity());
             stmt.setString(5, "sent");
             stmt.execute();
+
+            dispose();
+            new ManagerInterface(sql_con).setVisible(true);
         }
-        dispose();
-        new TableInfoPage(table_number, sql_con).setVisible(true);
     }
 
 }

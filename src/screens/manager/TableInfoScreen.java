@@ -102,7 +102,6 @@ public class TableInfoScreen extends JFrame {
                             "root@123");
                     new TableInfoScreen(con);
                 } catch (Exception e) {
-                    // TODO: handle exception
                 }
             }
         });

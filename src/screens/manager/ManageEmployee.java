@@ -80,7 +80,6 @@ public class ManageEmployee extends JFrame {
             mainPanel.add(backButton, BorderLayout.SOUTH);
             add(mainPanel);
         } catch (Exception e) {
-            // TODO: handle exception
             e.printStackTrace();
         }
     }

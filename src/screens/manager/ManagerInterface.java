@@ -23,6 +23,7 @@ public class ManagerInterface extends JFrame {
         JButton tablesButton = createStyledButton("Tables");
         JButton employeeButton = createStyledButton("Employee");
         JButton customerButton = createStyledButton("Customer Response");
+        JButton placeOrderButton = createStyledButton("Place Delivery Order");
         menuButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -48,14 +49,23 @@ public class ManagerInterface extends JFrame {
             }
         });
 
+        placeOrderButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+                new PlaceOrderPage(sql_con).setVisible(true);
+            }
+        });
+
         selectionPanel.add(menuButton);
         selectionPanel.add(tablesButton);
         selectionPanel.add(employeeButton);
         selectionPanel.add(customerButton);
 
         // Show property selection initially
-
-        add(selectionPanel);
+        setLayout(new BorderLayout());
+        add(selectionPanel, BorderLayout.CENTER);
+        add(placeOrderButton, BorderLayout.SOUTH);
         setVisible(true);
     }
 

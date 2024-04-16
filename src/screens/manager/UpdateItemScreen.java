@@ -31,16 +31,17 @@ public class UpdateItemScreen extends JFrame {
                 int item_id = rs.getInt("item_id");
                 JPanel itemPanel = new JPanel(new GridLayout(1, 6));
 
-                // Add item name label
                 JLabel itemNameLabel = new JLabel(rs.getString("item_name"));
                 itemPanel.add(itemNameLabel);
-                JLabel itemCusineLabel = new JLabel(rs.getString("cusine_name"));
+                JLabel itemCusineLabel = new JLabel("Cusine: " + rs.getString("cusine_name"));
                 itemPanel.add(itemCusineLabel);
-                // Add item price text field
+                JPanel itemPricePanel = new JPanel();
+                JLabel itemPriceLabel = new JLabel("Price: ");
                 JTextField itemPriceTextField = new JTextField(rs.getString("price")); // Initial value
-                itemPanel.add(itemPriceTextField);
+                itemPricePanel.add(itemPriceLabel);
+                itemPricePanel.add(itemPriceTextField);
+                itemPanel.add(itemPricePanel);
 
-                // Add availability dropdown
                 String[] availabilityOptions = { "Available", "Unavailable" };
                 JComboBox<String> availabilityDropdown = new JComboBox<>(availabilityOptions);
                 String item_avail = rs.getString("item_availability");
