@@ -1,6 +1,7 @@
 package screens.cook;
 
 import javax.swing.*;
+import screens.login.*;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -71,8 +72,20 @@ public class KitchenInterface extends JFrame {
                     new KitchenInterface(cook_id, sql_con).setVisible(true); // Create a new page
                 }
             });
+
+            JButton logoutButton = new JButton("Logout");
+
+            logoutButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    dispose(); // Close current window
+                    new RoleSelectionPage(sql_con).setVisible(true);
+                }
+            });
+
             JPanel buttonPanel = new JPanel(); // Panel for the refresh button
             buttonPanel.add(refreshButton); // Add refresh button to the panel
+            buttonPanel.add(logoutButton); 
 
             mainPanel.add(buttonPanel, BorderLayout.SOUTH); // Add button panel to main panel
 

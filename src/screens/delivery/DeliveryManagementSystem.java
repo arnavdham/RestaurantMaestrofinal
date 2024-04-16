@@ -1,5 +1,7 @@
 package screens.delivery;
 
+import screens.login.*;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -35,7 +37,18 @@ public class DeliveryManagementSystem extends JFrame {
             scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
             scrollPane.getViewport().setBackground(new Color(240, 240, 240)); // Set background color for viewport
 
-            add(scrollPane);
+            JButton logoutButton = new JButton("Logout");
+
+            logoutButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    dispose(); // Close current window
+                    new RoleSelectionPage(sql_con).setVisible(true);
+                }
+            });
+            setLayout(new BorderLayout());
+            add(scrollPane, BorderLayout.CENTER);
+            add(logoutButton, BorderLayout.SOUTH);
             setVisible(true);
         } catch (Exception e) {
             e.printStackTrace();

@@ -69,10 +69,7 @@ public class TableListPage extends JFrame {
             logoutButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    // Perform logout actions here
-                    // For example, closing current window and returning to login screen
                     dispose(); // Close current window
-                    // Perform any additional logout actions here, like returning to login screen
                     new RoleSelectionPage(sql_con).setVisible(true);
                 }
             });
