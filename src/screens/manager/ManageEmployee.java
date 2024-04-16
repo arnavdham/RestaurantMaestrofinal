@@ -20,9 +20,10 @@ public class ManageEmployee extends JFrame {
         try {
             Statement stmt = sql_con.createStatement();
             ResultSet rs = stmt.executeQuery(
-                    "select e.employee_id, e.first_name, e.last_name, e.salary, e.shift, 'Manager' as emp_role from manager m left join employee e using (employee_id) union (select e.employee_id, e.first_name, e.last_name, e.salary, e.shift, 'Waiter' as emp_role from waiter w left join employee e using (employee_id) union (select e.employee_id, e.first_name, e.last_name, e.salary, e.shift, 'Cook' as emp_role from cook c left join employee e using (employee_id) union (select e.employee_id, e.first_name, e.last_name, e.salary, e.shift, 'Delivery' as emp_role from delivery_boy b left join employee e using (employee_id))));");
+                    "(select e.employee_id, e.first_name, e.last_name, e.salary, e.shift, 'Waiter' as emp_role from waiter w left join employee e using (employee_id) union (select e.employee_id, e.first_name, e.last_name, e.salary, e.shift, 'Cook' as emp_role from cook c left join employee e using (employee_id) union (select e.employee_id, e.first_name, e.last_name, e.salary, e.shift, 'Delivery' as emp_role from delivery_boy b left join employee e using (employee_id))));");
             // Add employees dynamically
             for (; rs.next();) {
+
                 JLabel nameLabel = new JLabel("Name: " + rs.getString("first_name") + " " + rs.getString("last_name"));
                 JLabel roleLabel = new JLabel("Role: " + rs.getString("emp_role"));
 
