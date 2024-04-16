@@ -48,7 +48,6 @@ public class TableInfoScreen extends JFrame {
                                         && !lastName.isBlank() && !phoneNumber.isBlank()
                                         && phoneNumber.length() == 10) {
                                     try {
-                                        Integer.parseInt(phoneNumber);
 
                                         PreparedStatement stmt = sql_con.prepareStatement(
                                                 "UPDATE restaurant_table SET table_status='Reserved', res_first_name=? ,res_last_name=?, res_phone_number=? WHERE table_number=?");

@@ -89,6 +89,7 @@ public class LoginWindow extends JFrame {
                     if (!role_emp.first()) {
                         dispose();
                         new ErrorScreen("You're not a " + role).setVisible(true);
+                        return;
                     }
 
                     switch (role) {
