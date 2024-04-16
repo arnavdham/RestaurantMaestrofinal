@@ -118,20 +118,21 @@ public class UpdateItemScreen extends JFrame {
         // Add the list panel to a scroll pane
     }
 
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                try {
-                    Class.forName("com.mysql.cj.jdbc.Driver");
+    // public static void main(String[] args) {
+    // SwingUtilities.invokeLater(new Runnable() {
+    // public void run() {
+    // try {
+    // Class.forName("com.mysql.cj.jdbc.Driver");
 
-                    Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/restaurant_maestro",
-                            "root",
-                            "root@123");
-                    new UpdateItemScreen(con).setVisible(true);
-                } catch (Exception e) {
-                    System.out.println(e);
-                }
-            }
-        });
-    }
+    // Connection con =
+    // DriverManager.getConnection("jdbc:mysql://localhost:3306/restaurant_maestro",
+    // "root",
+    // "root@123");
+    // new UpdateItemScreen(con).setVisible(true);
+    // } catch (Exception e) {
+    // System.out.println(e);
+    // }
+    // }
+    // });
+    // }
 }

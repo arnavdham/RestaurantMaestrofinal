@@ -2,7 +2,6 @@ package screens.manager;
 
 import javax.swing.*;
 
-import screens.login.RoleSelectionPage;
 import utils.ErrorScreen;
 
 import java.awt.*;
@@ -82,8 +81,8 @@ public class TableInfoScreen extends JFrame {
                 }
             }
 
-//            JScrollPane scrollPane = new JScrollPane(mainPanel);
-//            add(scrollPane);
+            // JScrollPane scrollPane = new JScrollPane(mainPanel);
+            // add(scrollPane);
 
             JScrollPane scrollPane = new JScrollPane(mainPanel);
             add(scrollPane, BorderLayout.CENTER);
@@ -102,27 +101,26 @@ public class TableInfoScreen extends JFrame {
             add(buttonPanel, BorderLayout.SOUTH);
             setVisible(true);
 
-
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                try {
-                    Class.forName("com.mysql.cj.jdbc.Driver");
+    // public static void main(String[] args) {
+    // SwingUtilities.invokeLater(new Runnable() {
+    // public void run() {
+    // try {
+    // Class.forName("com.mysql.cj.jdbc.Driver");
 
-                    Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/restaurant_maestro",
-                            "root",
-                            "root@123");
-                    new TableInfoScreen(con);
-                } catch (Exception e) {
-                    // TODO: handle exception
-                }
-            }
-        });
-    }
+    // Connection con =
+    // DriverManager.getConnection("jdbc:mysql://localhost:3306/restaurant_maestro",
+    // "root",
+    // "root@123");
+    // new TableInfoScreen(con);
+    // } catch (Exception e) {
+    // }
+    // }
+    // });
+    // }
 
 }

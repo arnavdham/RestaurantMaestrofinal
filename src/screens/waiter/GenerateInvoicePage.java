@@ -73,7 +73,9 @@ public class GenerateInvoicePage extends JFrame {
                 public void actionPerformed(ActionEvent e) {
                     generateBill(sql_con, billAmount, "cash", order_id, firstNameField.getText(),
                             lastNameField.getText(), Integer.parseInt((String) ratingComboBox.getSelectedItem()));
-                    System.out.println("Payment method: Cash");
+                    dispose();
+                    new TableListPage(waiter_id, sql_con);
+                    return;
                 }
             });
 
@@ -82,7 +84,9 @@ public class GenerateInvoicePage extends JFrame {
                 public void actionPerformed(ActionEvent e) {
                     generateBill(sql_con, billAmount, "card", order_id, firstNameField.getText(),
                             lastNameField.getText(), Integer.parseInt((String) ratingComboBox.getSelectedItem()));
-                    System.out.println("Payment method: Card");
+                    dispose();
+                    new TableListPage(waiter_id, sql_con);
+                    return;
                 }
             });
 
@@ -91,7 +95,9 @@ public class GenerateInvoicePage extends JFrame {
                 public void actionPerformed(ActionEvent e) {
                     generateBill(sql_con, billAmount, "UPI", order_id, firstNameField.getText(),
                             lastNameField.getText(), Integer.parseInt((String) ratingComboBox.getSelectedItem()));
-                    System.out.println("Payment method: UPI");
+                    dispose();
+                    new TableListPage(waiter_id, sql_con);
+                    return;
                 }
             });
             JButton backButton = new JButton("Back");
@@ -135,6 +141,11 @@ public class GenerateInvoicePage extends JFrame {
             ResultSet invoice_rs = stmt2.getGeneratedKeys();
             invoice_rs.first();
             int invoice_id = invoice_rs.getInt(1);
+            PreparedStatement oi_stmt = sql_con
+                    .prepareStatement("INSERT INTO order_invoice (invoice_id, order_id) VALUES (?,?)");
+            oi_stmt.setInt(1, invoice_id);
+            oi_stmt.setInt(2, order_id);
+            oi_stmt.executeUpdate();
             PreparedStatement stmt3 = sql_con.prepareStatement(
                     "INSERT INTO customer_information (invoice_id, cfirst_name, clast_name) VALUES (?,?,?)");
             stmt3.setInt(1, invoice_id);
@@ -156,20 +167,21 @@ public class GenerateInvoicePage extends JFrame {
 
     }
 
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                try {
-                    Class.forName("com.mysql.cj.jdbc.Driver");
+    // public static void main(String[] args) {
+    // SwingUtilities.invokeLater(new Runnable() {
+    // public void run() {
+    // try {
+    // Class.forName("com.mysql.cj.jdbc.Driver");
 
-                    Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/restaurant_maestro",
-                            "root",
-                            "root@123");
-                    new GenerateInvoicePage(con, 1, 2); // Pass the bill amount as an argument
-                } catch (Exception e) {
-                    System.out.println(e);
-                }
-            }
-        });
-    }
+    // Connection con =
+    // DriverManager.getConnection("jdbc:mysql://localhost:3306/restaurant_maestro",
+    // "root",
+    // "root@123");
+    // new GenerateInvoicePage(con, 1, 2); // Pass the bill amount as an argument
+    // } catch (Exception e) {
+    // System.out.println(e);
+    // }
+    // }
+    // });
+    // }
 }

@@ -75,6 +75,8 @@ public class LoginWindow extends JFrame {
                     if (!employee.first()) {
                         dispose();
                         new ErrorScreen("Invalid username or password").setVisible(true);
+
+                        return;
                     }
                     int employee_id = employee.getInt("employee_id");
                     final String role_string;

@@ -9,7 +9,7 @@ public class RMS {
             Class.forName("com.mysql.cj.jdbc.Driver");
 
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/restaurant_maestro", "root",
-                    "Arnav@2307");
+                    "root@123");
             SwingUtilities.invokeLater(() -> {
                 new RoleSelectionPage(con).setVisible(true);
             });

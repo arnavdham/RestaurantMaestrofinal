@@ -13,8 +13,8 @@ public class TableListPage extends JFrame {
     public TableListPage(int waiter_id, Connection sql_con) {
         super("Table Interface");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLocationRelativeTo(null);// Center the window
         setSize(250, 300);
+        setLocationRelativeTo(null);// Center the window
         setResizable(false);
 
         JPanel panel = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 10));

@@ -59,7 +59,15 @@ public class ManagerInterface extends JFrame {
                 new PlaceOrderPage(sql_con).setVisible(true);
             }
         });
- 
+
+        customerButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+                new CustomerResponse(sql_con).setVisible(true);
+            }
+        });
+
         logoutButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -72,7 +80,7 @@ public class ManagerInterface extends JFrame {
         selectionPanel.add(tablesButton);
         selectionPanel.add(employeeButton);
         selectionPanel.add(customerButton);
-        
+
         // Show property selection initially
         setLayout(new BorderLayout());
         add(selectionPanel, BorderLayout.CENTER);

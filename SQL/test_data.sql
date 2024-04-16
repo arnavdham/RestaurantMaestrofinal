@@ -1,7 +1,7 @@
 -- Insert data for employees
 INSERT INTO employee (first_name, last_name, username, password_hash, shift, salary, gender) VALUES
 ('John', 'Doe', 'john_doe', '5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8','Both', 30000, 'male'), -- Manager
-('Alice', 'Smith', 'alice_smith', '5e884898daalice_smith28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8','Both',  25000, 'female'), -- Waiter
+('Alice', 'Smith', 'alice_smith', '5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8','Both',  25000, 'female'), -- Waiter
 ('Bob', 'Johnson', 'bob_johnson', '5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8', 'Both',25000, 'male'), -- Waiter
 ('Charlie', 'Brown', 'charlie_brown', '5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8','Both', 20000, 'male'), -- Cook
 ('Emma', 'Lee', 'emma_lee', '5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8','Both', 20000, 'female'), -- Cook
