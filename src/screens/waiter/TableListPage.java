@@ -1,5 +1,7 @@
 package screens.waiter;
 
+import screens.login.*;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -61,6 +63,24 @@ public class TableListPage extends JFrame {
                 }
                 panel.add(tableButton);
             }
+
+            JButton logoutButton = new JButton("Logout");
+
+            logoutButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    dispose(); // Close current window
+                    new RoleSelectionPage(sql_con).setVisible(true);
+                }
+            });
+
+            setLayout(new BorderLayout());
+            add(panel, BorderLayout.CENTER);
+            JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+            buttonPanel.add(logoutButton);
+            add(buttonPanel, BorderLayout.SOUTH); // Add buttons panel to the bottom of the frame
+            setVisible(true);
+
         } catch (SQLException e) {
             e.printStackTrace();
         }

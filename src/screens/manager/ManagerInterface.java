@@ -4,6 +4,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.*;
+import screens.login.*;
 
 import javax.swing.*;
 
@@ -24,6 +25,8 @@ public class ManagerInterface extends JFrame {
         JButton employeeButton = createStyledButton("Employee");
         JButton customerButton = createStyledButton("Customer Response");
         JButton placeOrderButton = createStyledButton("Place Delivery Order");
+        JButton logoutButton = createStyledButton("Logout");
+
         menuButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -56,16 +59,27 @@ public class ManagerInterface extends JFrame {
                 new PlaceOrderPage(sql_con).setVisible(true);
             }
         });
+ 
+        logoutButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose(); // Close current window
+                new RoleSelectionPage(sql_con).setVisible(true);
+            }
+        });
 
         selectionPanel.add(menuButton);
         selectionPanel.add(tablesButton);
         selectionPanel.add(employeeButton);
         selectionPanel.add(customerButton);
-
+        
         // Show property selection initially
         setLayout(new BorderLayout());
         add(selectionPanel, BorderLayout.CENTER);
-        add(placeOrderButton, BorderLayout.SOUTH);
+        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        buttonPanel.add(placeOrderButton);
+        buttonPanel.add(logoutButton);
+        add(buttonPanel, BorderLayout.SOUTH); // Add buttons panel to the bottom of the frame
         setVisible(true);
     }
 
