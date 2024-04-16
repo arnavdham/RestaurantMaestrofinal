@@ -2,6 +2,7 @@ package screens.manager;
 
 import javax.swing.*;
 
+import screens.login.RoleSelectionPage;
 import utils.ErrorScreen;
 
 import java.awt.*;
@@ -81,10 +82,27 @@ public class TableInfoScreen extends JFrame {
                 }
             }
 
-            JScrollPane scrollPane = new JScrollPane(mainPanel);
-            add(scrollPane);
+//            JScrollPane scrollPane = new JScrollPane(mainPanel);
+//            add(scrollPane);
 
+            JScrollPane scrollPane = new JScrollPane(mainPanel);
+            add(scrollPane, BorderLayout.CENTER);
+
+            // Back button
+            JButton backButton = new JButton("Back");
+            backButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    dispose(); // Close the current window
+                    new ManagerInterface(sql_con).setVisible(true);
+                }
+            });
+            JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+            buttonPanel.add(backButton);
+            add(buttonPanel, BorderLayout.SOUTH);
             setVisible(true);
+
+
         } catch (Exception e) {
             e.printStackTrace();
         }

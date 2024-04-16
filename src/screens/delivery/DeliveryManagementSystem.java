@@ -1,5 +1,4 @@
 package screens.delivery;
-
 import screens.login.*;
 
 import javax.swing.*;
@@ -78,6 +77,7 @@ public class DeliveryManagementSystem extends JFrame {
                             .prepareStatement("UPDATE restaurant_order SET order_status='completed' WHERE order_id=?");
                     stmt.setInt(1, order_id);
                     stmt.executeUpdate();
+                    JOptionPane.showMessageDialog(null, "Delivery for Order " + order_id + " is completed!"); // Show pop-up message
                     dispose();
                     new DeliveryManagementSystem(waiter_id, sql_con);
                 } catch (Exception err) {

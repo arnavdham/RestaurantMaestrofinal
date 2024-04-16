@@ -1,4 +1,4 @@
-DROP DATABASE restaurant_maestro;
+-- DROP DATABASE restaurant_maestro;
 CREATE DATABASE restaurant_maestro;
 USE restaurant_maestro;
 CREATE TABLE employee (

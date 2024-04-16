@@ -125,6 +125,7 @@ public class PlaceOrderPage extends JFrame {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     dispose();
+                    new ManagerInterface(sql_con).setVisible(true);
                 }
             });
 

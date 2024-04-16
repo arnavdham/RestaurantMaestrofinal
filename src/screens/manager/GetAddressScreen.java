@@ -1,5 +1,4 @@
 package screens.manager;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -51,6 +50,7 @@ public class GetAddressScreen extends JFrame {
                         stmt1.setInt(2, order_id);
                         stmt1.setString(3, address);
                         stmt1.executeUpdate();
+                        JOptionPane.showMessageDialog(null, "Delivery order placed successfully!"); // Show pop-up message
                     } catch (Exception err) {
                         err.printStackTrace();
                     }
@@ -59,7 +59,17 @@ public class GetAddressScreen extends JFrame {
 
             mainPanel.add(inputPanel, BorderLayout.CENTER);
             mainPanel.add(submitButton, BorderLayout.SOUTH);
-
+            JButton backButton = new JButton("Back");
+            backButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    dispose(); // Close the current window
+                    new PlaceOrderPage(sql_con).setVisible(true);
+                }
+            });
+            JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+            buttonPanel.add(backButton);
+            add(buttonPanel, BorderLayout.SOUTH);
             add(mainPanel);
             setVisible(true);
 
