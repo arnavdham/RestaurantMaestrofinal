@@ -180,7 +180,7 @@ public class PlaceOrderPage extends JFrame {
             stmt.execute();
 
             dispose();
-            new ManagerInterface(sql_con).setVisible(true);
+            new GetAddressScreen(sql_con, order_id).setVisible(true);
         }
     }
 

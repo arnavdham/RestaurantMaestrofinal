@@ -37,7 +37,7 @@ public class TableListPage extends JFrame {
                         @Override
                         public void actionPerformed(ActionEvent e) {
                             dispose();
-                            new TableInfoPage(tableNumber, sql_con).setVisible(true);
+                            new TableInfoPage(tableNumber, sql_con, waiter_id).setVisible(true);
                         }
                     });
                 } else if (tableStatus.equalsIgnoreCase("available")) {
@@ -46,7 +46,7 @@ public class TableListPage extends JFrame {
                         @Override
                         public void actionPerformed(ActionEvent e) {
                             dispose();
-                            new TableInfoPage(tableNumber, sql_con).setVisible(true);
+                            new TableInfoPage(tableNumber, sql_con, waiter_id).setVisible(true);
                         }
                     });
                 } else if (tableStatus.equalsIgnoreCase("reserved")) {
@@ -55,7 +55,7 @@ public class TableListPage extends JFrame {
                         @Override
                         public void actionPerformed(ActionEvent e) {
                             dispose();
-                            new TableInfoPage(tableNumber, sql_con).setVisible(true);
+                            new TableInfoPage(tableNumber, sql_con, waiter_id).setVisible(true);
                         }
                     });
                 }
